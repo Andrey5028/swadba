@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Приглашение на свадьбу</title>
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat&display=swap" rel="stylesheet">
   <style>
@@ -13,9 +13,7 @@
       background-size: cover;
       color: #2e2e2e;
     }
-    .content-wrapper {
-      padding: 30px 20px;
-    }
+
     header {
       text-align: center;
       padding: 40px 20px;
@@ -23,117 +21,103 @@
       color: #fff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     }
+
     header h1 {
       font-family: 'Marck Script', cursive;
       font-size: 3em;
       margin: 0;
     }
-    .photo-container {
-      margin-top: 20px;
-    }
+
     .photo-container img {
       width: 200px;
       height: auto;
       border-radius: 15px;
       border: 4px solid #4b0f1c;
     }
-    section {
+
+    .italic-text {
+      font-family: 'Marck Script', cursive;
+      font-size: 2em;    
+    }
+
+    .content-wrapper {
+      padding: 30px 20px;
       max-width: 1000px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
     }
+
     .block {
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
       border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 30px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .calendar-header {
+
+    h2 {
+      font-family: 'Marck Script', cursive;
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #4b0f1c;
+      text-align: center;
+    }
+
+    .calendar-header, .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
+    }
+
+    .calendar-header {
       font-size: 0.8em;
       color: #666;
       margin-bottom: 5px;
     }
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      text-align: center;
-      font-weight: 500;
-    }
-    .day {
+
+    .calendar .day, .calendar .heart {
       padding: 10px;
       border-radius: 5px;
       background: #f3f3f3;
     }
+
     .heart {
       background: #4b0f1c;
       color: white;
       position: relative;
     }
+
     .heart::after {
       content: '♥';
       position: absolute;
       right: 5px;
       top: 2px;
     }
-    h2 {
-      font-family: 'Marck Script', cursive;
-      font-size: 2em;
-      margin-bottom: 10px;
-      color: #4b0f1c;
-    }
-    .timing-title {
-      font-family: 'Marck Script', cursive;
-      font-size: 2em;
-      color: #4b0f1c;
-      margin-bottom: 15px;
-      text-align: left;
-    }
+
     .timing {
       display: flex;
-      gap: 20px;
-      font-family: 'Georgia', serif;
-      justify-content: space-between;
       flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
     }
+
     .timing-item {
       padding: 20px;
       border-left: 5px solid #4b0f1c;
       border-radius: 10px;
       font-size: 1.1em;
-      width: 100%;
       background: #fbeeee;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      flex: 1 1 48%;
+      box-sizing: border-box;
     }
-    .form-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: flex-start;
-      flex-direction: column;
-    }
-    .radio-group, .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .radio-group label, .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 5px 10px;
-      background: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
+
     input[type="text"], textarea {
       padding: 10px;
       width: 100%;
@@ -141,6 +125,25 @@
       border-radius: 5px;
       font-family: inherit;
     }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checkbox-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
     button {
       background: #4b0f1c;
       color: white;
@@ -150,35 +153,71 @@
       font-size: 1em;
       cursor: pointer;
     }
+
     .requests {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: space-between;
     }
-    .requests .card {
+
+    .card {
       flex: 1 1 45%;
       background: #fbeeee;
       padding: 15px;
       border-left: 5px solid #4b0f1c;
       border-radius: 10px;
     }
-    .chat-section {
+
+    .footer-note {
       text-align: center;
-      font-style: italic;
-      margin-top: 40px;
+      color: white;
+      font-size: 16px;
     }
-    .chat-section a {
-      display: inline-block;
-      margin-top: 10px;
-      color: #4b0f1c;
-      text-decoration: underline;
-    }
-    .checkbox-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
+
+    /* Адаптация под мобильные устройства */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      .timing-item {
+        flex: 1 1 100%;
+      }
+
+      .checkbox-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .requests {
+        flex-direction: column;
+      }
+
+      .card {
+        flex: 1 1 100%;
+      }
+
+      .photo-container img {
+        width: 100%;
+        max-width: 250px;
+      }
+
+      .content-wrapper {
+        padding: 20px 10px;
+      }
+
+      .block {
+        padding: 20px;
+      }
+
+      .footer-note {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
   <script>
@@ -196,85 +235,92 @@
   <header>
     <h1>Андрей & Ксения</h1>
     <div class="photo-container">
-      <img src="https://via.placeholder.com/200" alt="Фото пары">
+      <img src="https://github.com/Andrey5028/swadba/blob/main/your-photo.jpg?raw=true" alt="Фото пары">
     </div>
-    <p>Создание нашей семьи<br><strong>20.05.2025</strong></p>
+    <p class="italic-text">Создание нашей семьи<br><strong>20.05.2025</strong></p>
   </header>
+
   <div class="content-wrapper">
-    <section>
-      <div class="block">
-        <h2>Дорогая семья!</h2>
-        <p>Мы рады сообщить вам, что мы станем мужем и женой! Этот день будет особенным для нас, и мы будем счастливы разделить его с вами. Приглашаем вас на нашу свадьбу, где будет много любви, радости и теплых моментов.</p>
+    <div class="block">
+      <h2>Дорогая семья!</h2>
+      <p>Мы рады сообщить вам, что мы станем мужем и женой! Этот день будет особенным для нас, и мы будем счастливы разделить его с вами. Приглашаем вас на нашу свадьбу, где будет много любви, радости и теплых моментов.</p>
+    </div>
+
+    <div class="block">
+      <h2>Календарь</h2>
+      <div class="calendar-header">
+        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
       </div>
-      <div class="block">
-        <h2>Календарь</h2>
-        <div class="calendar-header">
-          <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+      <div class="calendar">
+        <div>19</div><div class="day heart">20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>События дня</h2>
+      <div class="timing">
+        <div class="timing-item">
+          💍 <strong>15:00</strong><br>Церемония в Чеховском ЗАГСе
         </div>
-        <div class="calendar">
-          <div>19</div><div class="day heart">20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
-        </div>
-      </div>
-      <div class="block">
-        <h2>События дня</h2>
-        <div class="timing">
-          <div class="timing-item">
-            💍 <strong>15:00</strong><br>Церемония в Чеховском ЗАГСе
-          </div>
-          <div class="timing-item">
-            💃 <strong>17:00</strong><br>Ужин и танцы в ресторане «Колхида», ул. Чехова 20А
-          </div>
-        </div>
-      </div>
-      <div class="block">
-        <h2>Подтверждение присутствия</h2>
-        <form onsubmit="validateForm(event)">
-          <input type="text" placeholder="Ваше имя" required>
-          <div class="form-group">
-            <label>Что из горячего предпочитаете?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="dish" value="meat"> 🥩 Мясо</label>
-              <label><input type="radio" name="dish" value="fish"> 🐟 Рыба</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Чем хотели бы украсить вечер?</label>
-            <div class="checkbox-columns">
-              <label><input type="checkbox"> 🍾 Белое вино</label>
-              <label><input type="checkbox"> 🍷 Красное вино</label>
-              <label><input type="checkbox"> 🥂 Игристое вино</label>
-              <label><input type="checkbox"> 🍸 Вермут</label>
-              <label><input type="checkbox"> 🥃 Виски</label>
-              <label><input type="checkbox"> 🥃 Коньяк</label>
-              <label><input type="checkbox"> 🍹 Ром</label>
-              <label><input type="checkbox"> 🍸 Джин</label>
-              <label><input type="checkbox"> 🍶 Водка</label>
-            </div>
-          </div>
-          <div>
-            <label>Ваши дополнительные пожелания</label>
-            <textarea rows="3" placeholder="Напишите здесь..."></textarea>
-          </div>
-          <button type="submit">Подтвердить</button>
-        </form>
-      </div>
-      <div class="block">
-        <h2>Несколько наших пожеланий</h2>
-        <div class="requests">
-          <div class="card">
-            <strong>Цветы:</strong> 💐 Пожалуйста, не дарите нам живые цветы. Лучше хорошую бутылочку любого алкоголя.
-          </div>
-          <div class="card">
-            <strong>Подарки:</strong> 🎁 Если хотите подарить ценный и нужный нам подарок — лучше конверт. Спасибо!
-          </div>
+        <div class="timing-item">
+          💃 <strong>17:00</strong><br>Ужин и танцы в ресторане «Колхида», ул. Чехова 20А
         </div>
       </div>
-      <div class="chat-section">
-        <p>Присоединяйтесь к нашему Telegram/WhatsApp каналу</p>
-        <p>Делитесь фотографиями и видео с торжества</p>
-        <a href="#">Перейти в чат</a>
+    </div>
+
+    <div class="block">
+      <h2>Подтверждение присутствия</h2>
+      <form onsubmit="validateForm(event)">
+        <input type="text" placeholder="Ваше имя" required>
+
+        <div class="form-group">
+          <label>Что из горячего предпочитаете?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="dish" value="meat"> 🥩 Мясо</label>
+            <label><input type="radio" name="dish" value="fish"> 🐟 Рыба</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Чем хотели бы украсить вечер?</label>
+          <div class="checkbox-columns">
+            <label><input type="checkbox"> 🍾 Белое вино</label>
+            <label><input type="checkbox"> 🍷 Красное вино</label>
+            <label><input type="checkbox"> 🥂 Игристое вино</label>
+            <label><input type="checkbox"> 🍸 Вермут</label>
+            <label><input type="checkbox"> 🥃 Виски</label>
+            <label><input type="checkbox"> 🥃 Коньяк</label>
+            <label><input type="checkbox"> 🍹 Ром</label>
+            <label><input type="checkbox"> 🍸 Джин</label>
+            <label><input type="checkbox"> 🍶 Водка</label>
+          </div>
+        </div>
+
+        <div>
+          <label>Ваши дополнительные пожелания</label>
+          <textarea rows="3" placeholder="Напишите здесь..."></textarea>
+        </div>
+
+        <button type="submit">Подтвердить</button>
+      </form>
+    </div>
+
+    <div class="block">
+      <h2>Несколько наших пожеланий</h2>
+      <div class="requests">
+        <div class="card">
+          <strong>Цветы:</strong> 💐 Пожалуйста, не дарите нам живые цветы. Лучше хорошую бутылочку любого алкоголя.
+        </div>
+        <div class="card">
+          <strong>Подарки:</strong> 🎁 Если хотите подарить ценный и нужный нам подарок — лучше конверт. Спасибо!
+        </div>
       </div>
-    </section>
+    </div>
+
+    <div class="footer-note">
+      <p>Присоединяйтесь к нашему Telegram/WhatsApp каналу.</p>
+      <p>Делитесь фотографиями и видео с торжества</p>
+    </div>
   </div>
 </body>
 </html>
