@@ -6,13 +6,15 @@
   <title>Приглашение на свадьбу</title>
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: url('https://i.imgur.com/OLg5o7G.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #2e2e2e;
-    }
+    body body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: url('https://i.imgur.com/OLg5o7G.png') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
     header {
       text-align: center;
@@ -177,6 +179,9 @@
 
     /* Адаптация под мобильные устройства */
     @media (max-width: 768px) {
+       body {
+    background-attachment: scroll; /* фикс для iOS */
+  }
       header h1 {
         font-size: 2em;
       }
