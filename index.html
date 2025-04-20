@@ -323,39 +323,43 @@
     </div>
   </div>
   <script>
-document.querySelector("form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const name = document.querySelector('input[type="text"]').value.trim();
-  const dish = document.querySelector('input[name="dish"]:checked')?.value || "";
-  const wishes = document.querySelector("textarea").value.trim();
-  const drinkCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-  const drinks = [];
-  drinkCheckboxes.forEach(cb => {
-    if (cb.checked) drinks.push(cb.parentElement.textContent.trim());
-  });
-  const formData = {
-    name,
-    dish,
-    drinks: drinks.join(", "),
-    wishes
-  };
-  fetch("https://script.google.com/macros/s/AKfycbxv-Twcq_rgdBforwOHUrv_HOxJZ2OD3XZkM_7vzgR7X5eX1C0FRpCM0Gtg-b07oCi7/exec", {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      "Content-Type": "application/json"
+  function validateForm(event) {
+    event.preventDefault();
+
+    const name = document.querySelector('input[type="text"]').value;
+    const dish = document.querySelector('input[name="dish"]:checked')?.value;
+    const wishes = document.querySelector('textarea').value;
+
+    const drinks = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+      .map(cb => cb.parentElement.textContent.trim()).join(", ");
+
+    if (!dish) {
+      alert("Пожалуйста, выберите мясо или рыбу.");
+      return;
     }
-  })
-  .then(res => res.text())
-  .then(response => {
-    alert("🎉 Спасибо! Ваша заявка отправлена.");
-    document.querySelector("form").reset();
-  })
-  .catch(error => {
-    console.error("Ошибка:", error);
-    alert("❌ Ошибка отправки формы. Попробуйте позже.");
-  });
-});
+
+    const data = { name, dish, drinks, wishes };
+
+    fetch("https://script.google.com/macros/s/AKfycbxv-Twcq_rgdBforwOHUrv_HOxJZ2OD3XZkM_7vzgR7X5eX1C0FRpCM0Gtg-b07oCi7/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Network response was not ok");
+      return res.text();
+    })
+    .then(msg => {
+      alert("Спасибо! Данные отправлены.");
+    })
+    .catch(err => {
+      console.error("Ошибка отправки:", err);
+      alert("Ошибка отправки формы. Попробуйте позже.");
+    });
+  }
+</script>
 </script>
 </body>
 </html>
