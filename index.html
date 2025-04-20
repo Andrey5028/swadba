@@ -243,7 +243,7 @@
   <div class="content-wrapper">
     <div class="block">
       <h2>Дорогая семья!</h2>
-      <p>Мы рады сообщить вам, что мы станем мужем и женой! Этот день будет особенным для нас, и мы будем счастливы разделить его с вами. Приглашаем вас на нашу свадьбу, где будет много любви, радости и теплых моментов.</p>
+      <p>Рады сообщить вам, что мы станем мужем и женой! Этот день будет особенным для нас, и мы будем счастливы разделить его с вами. Приглашаем вас на нашу свадьбу, где будет много любви, радости и теплых моментов.</p>
     </div>
 
     <div class="block">
@@ -322,5 +322,33 @@
       <p>Делитесь фотографиями и видео с торжества</p>
     </div>
   </div>
+<script>
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.querySelector('input[type="text"]').value;
+  const dish = document.querySelector('input[name="dish"]:checked')?.value || "";
+  const wishes = document.querySelector("textarea").value;
+
+  const drinkCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+  const drinks = [];
+  drinkCheckboxes.forEach(cb => {
+    if (cb.checked) drinks.push(cb.parentElement.innerText.trim());
+  });
+
+  fetch("https://script.google.com/macros/s/AKfycbzLitSUKggYRVIqqBSm_Wzcy5EZQJye26_EsjBNbymyfXwg0MEJF4GjC9m5pZDTyGG1/exec", {
+    method: "POST",
+    body: JSON.stringify({ name, dish, drinks, wishes }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.text())
+    .then(msg => {
+      alert("Спасибо! Ваш ответ записан ❤️");
+      document.querySelector("form").reset();
+    });
+});
+</script>
 </body>
 </html>
