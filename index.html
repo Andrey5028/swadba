@@ -325,17 +325,14 @@
   <script>
 document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
-
   const name = document.querySelector('input[type="text"]').value.trim();
   const dish = document.querySelector('input[name="dish"]:checked')?.value || "";
   const wishes = document.querySelector("textarea").value.trim();
-
   const drinkCheckboxes = document.querySelectorAll('input[type="checkbox"]');
   const drinks = [];
   drinkCheckboxes.forEach(cb => {
     if (cb.checked) drinks.push(cb.parentElement.textContent.trim());
   });
-
   const formData = {
     name,
     dish,
