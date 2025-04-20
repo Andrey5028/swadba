@@ -335,8 +335,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
   drinkCheckboxes.forEach(cb => {
     if (cb.checked) drinks.push(cb.parentElement.innerText.trim());
   });
-
-  fetch("https://script.google.com/macros/s/AKfycbwglYpaBE_q6jaZkdwRISiQbqITZ3hwegOrXI8mqsZdDitgOuRfuqtI4EDnxcxSU076/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxv-Twcq_rgdBforwOHUrv_HOxJZ2OD3XZkM_7vzgR7X5eX1C0FRpCM0Gtg-b07oCi7/exec", {
     method: "POST",
     body: JSON.stringify({ name, dish, drinks, wishes }),
     headers: {
