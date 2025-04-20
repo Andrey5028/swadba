@@ -271,7 +271,7 @@
     <div class="block">
       <h2>Подтверждение присутствия</h2>
       <form onsubmit="validateForm(event)">
-        <input type="text" placeholder="Ваше имя" required>
+        <input type="text" name="name" placeholder="Ваше имя" required>
 
         <div class="form-group">
           <label>Что из горячего предпочитаете?</label>
@@ -284,21 +284,21 @@
         <div class="form-group">
           <label>Чем хотели бы украсить вечер?</label>
           <div class="checkbox-columns">
-            <label><input type="checkbox"> 🍾 Белое вино</label>
-            <label><input type="checkbox"> 🍷 Красное вино</label>
-            <label><input type="checkbox"> 🥂 Игристое вино</label>
-            <label><input type="checkbox"> 🍸 Вермут</label>
-            <label><input type="checkbox"> 🥃 Виски</label>
-            <label><input type="checkbox"> 🥃 Коньяк</label>
-            <label><input type="checkbox"> 🍹 Ром</label>
-            <label><input type="checkbox"> 🍸 Джин</label>
-            <label><input type="checkbox"> 🍶 Водка</label>
+            <label><input type="checkbox"> name="drinks[]" value="Белое вино"> 🍾 Белое вино</label>
+            <label><input type="checkbox"> name="drinks[]" value="Красное вино"> 🍷 Красное вино</label>
+            <label><input type="checkbox"> name="drinks[]" value="Игристое вино"> 🥂 Игристое вино</label>
+            <label><input type="checkbox"> name="drinks[]" value="Вермут"> 🍸 Вермут</label>
+            <label><input type="checkbox"> name="drinks[]" value="Виски"> 🥃 Виски</label>
+            <label><input type="checkbox"> name="drinks[]" value="Коньяк"> 🥃 Коньяк</label>
+            <label><input type="checkbox"> name="drinks[]" value="Ром"> 🍹 Ром</label>
+            <label><input type="checkbox"> name="drinks[]" value="Джин"> 🍸 Джин</label>
+            <label><input type="checkbox"> name="drinks[]" value="Водка"> 🍶 Водка</label>
           </div>
         </div>
 
         <div>
           <label>Ваши дополнительные пожелания</label>
-          <textarea rows="3" placeholder="Напишите здесь..."></textarea>
+          <textarea name="wishes" rows="3" placeholder="Напишите здесь..."></textarea>
         </div>
 
         <button type="submit">Подтвердить</button>
@@ -323,42 +323,27 @@
     </div>
   </div>
   <script>
-  function validateForm(event) {
-    event.preventDefault();
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-    const name = document.querySelector('input[type="text"]').value;
-    const dish = document.querySelector('input[name="dish"]:checked')?.value;
-    const wishes = document.querySelector('textarea').value;
+  const form = e.target;
+  const formData = new FormData(form);
 
-    const drinks = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-      .map(cb => cb.parentElement.textContent.trim()).join(", ");
-
-    if (!dish) {
-      alert("Пожалуйста, выберите мясо или рыбу.");
-      return;
-    }
-
-    const data = { name, dish, drinks, wishes };
-
-    fetch("https://script.google.com/macros/s/AKfycbyvTKkfuFGqJUNZfuExh7UHoPO-4YvOKcs23GiO8qWeHV74ia246QCbM_G_E477wMwq/exec", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Network response was not ok");
-      return res.text();
-    })
-    .then(msg => {
-      alert("Спасибо! Данные отправлены.");
-    })
-    .catch(err => {
-      console.error("Ошибка отправки:", err);
-      alert("Ошибка отправки формы. Попробуйте позже.");
-    });
-  }
+  fetch("https://script.google.com/macros/s/AKfycbyvTKkfuFGqJUNZfuExh7UHoPO-4YvOKcs23GiO8qWeHV74ia246QCbM_G_E477wMwq/exec", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert("Спасибо! Форма успешно отправлена.");
+    form.reset(); // Очистить форму
+  })
+  .catch(error => {
+    alert("Ошибка отправки формы. Попробуйте позже.");
+    console.error("Ошибка:", error);
+  });
+});
+</script>
 </script>
 </script>
 </body>
