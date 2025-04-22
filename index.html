@@ -76,25 +76,20 @@
       margin-bottom: 5px;
     }
 
-    .calendar .day, .calendar .heart {
-      padding: 10px;
-      border-radius: 5px;
-      background: #f3f3f3;
-    }
+    .calendar-day.marked {
+  position: relative;
+  color: transparent; 
+}
 
-    .heart {
-      background: #4b0f1c;
-      color: white;
-      position: relative;
-    }
-
-    .heart::after {
-      content: '♥';
-      position: absolute;
-      right: 5px;
-      top: 2px;
-    }
-
+.calendar-day.marked::after {
+  content: '❤️';
+  color: #8B0000; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+}
     .timing {
       display: flex;
       flex-wrap: wrap;
@@ -177,10 +172,13 @@
 
     /* Адаптация под мобильные устройства */
     @media (max-width: 768px) {
-      header h1 {
+   header h1 {
         font-size: 2em;
       }
 
+       .calendar-day.marked::after {
+    font-size: 1.2em;
+  }
       .timing-item {
         flex: 1 1 100%;
       }
@@ -252,7 +250,7 @@
         <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
       </div>
       <div class="calendar">
-        <div>19</div><div class="day heart">20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+        <div>19</div><div class="calendar-day marked">20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
       </div>
     </div>
 
