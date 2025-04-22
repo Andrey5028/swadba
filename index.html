@@ -352,11 +352,11 @@ document.querySelector("form").addEventListener("submit", function(e) {
   })
   .then(response => response.text())
   .then(data => {
-    alert("Спасибо! Форма успешно отправлена.");
+    alert("Спасибо! Будем ждать!");
     form.reset();
   })
   .catch(error => {
-    alert("Ошибка отправки формы. Попробуйте позже.");
+    alert("Упс, что то пошло не так. Попробуйте позже.");
     console.error("Ошибка:", error);
   });
 });
