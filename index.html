@@ -319,43 +319,25 @@
       <p>Присоединяйтесь к нашему Telegram/WhatsApp каналу.</p>
       <p>Делитесь фотографиями и видео с торжества</p>
     </div>
-  </div>
-<script>
-
- document.querySelector("form").addEventListener("submit", function(e) {
+  </div><script>
+document.querySelector("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const form = e.target;
-  const name = form.querySelector('input[name="name"]').value;
-  const dish = form.querySelector('input[name="dish"]:checked')?.value || '';
-  const wishes = form.querySelector('textarea[name="wishes"]').value;
+  const formData = new FormData(form);
 
-const drinks = [];
-form.querySelectorAll('input[name="drinks[]"]:checked').forEach(cb => {
-  drinks.push(cb.value);
-});
-  const data = {
-    name,
-    dish,
-    wishes,
-    drinks: drinks.join(', ')
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbw3r0F_FZXLg-O9nYR2UhNaBoA4YQbrxIHeujvq6zGlPJief8nOhchNmCcJuNixKKV5/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzCaw4l0kpmgpLjxiHGKRauexlvFAHOidm-DKjS4EX0Pe1layDG3Sr6iVG0GxKFeSrD/exec", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
+    body: formData
   })
-  .then(res => res.text())
-  .then(() => {
+  .then(response => response.text())
+  .then(data => {
     alert("Спасибо! Форма успешно отправлена.");
     form.reset();
   })
-  .catch(err => {
-    alert("Ошибка при отправке.");
-    console.error(err);
+  .catch(error => {
+    alert("Ошибка отправки формы. Попробуйте позже.");
+    console.error("Ошибка:", error);
   });
 });
 </script>
