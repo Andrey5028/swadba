@@ -326,21 +326,47 @@ document.querySelector("form").addEventListener("submit", function(e) {
 
   const form = e.target;
   const formData = new FormData(form);
+  const data = {};
+
+  // Преобразуем FormData в обычный объект и обрабатываем checkbox-группу drinks[]
+  formData.forEach((value, key) => {
+    if (key.endsWith("[]")) {
+      const cleanKey = key.replace("[]", "");
+      if (!data[cleanKey]) {
+        data[cleanKey] = [];
+      }
+      data[cleanKey].push(value);
+    } else {
+      data[key] = value;
+    }
+  });
+
+  // Преобразуем данные в формат x-www-form-urlencoded
+  const encoded = Object.entries(data).map(([key, value]) => {
+    if (Array.isArray(value)) {
+      return value.map(val => `${encodeURIComponent(key + '[]')}=${encodeURIComponent(val)}`).join("&");
+    }
+    return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+  }).join("&");
 
   fetch("https://script.google.com/macros/s/AKfycbw3r0F_FZXLg-O9nYR2UhNaBoA4YQbrxIHeujvq6zGlPJief8nOhchNmCcJuNixKKV5/exec", {
     method: "POST",
-    body: formData
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: encoded
   })
   .then(response => response.text())
   .then(data => {
     alert("Спасибо! Форма успешно отправлена.");
-    form.reset(); // Очистить форму
+    form.reset();
   })
   .catch(error => {
     alert("Ошибка отправки формы. Попробуйте позже.");
     console.error("Ошибка:", error);
   });
 });
+</script>
 </script>
 </script>
 </script>
