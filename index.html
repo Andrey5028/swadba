@@ -282,15 +282,15 @@
         <div class="form-group">
           <label>Чем хотели бы украсить вечер?</label>
           <div class="checkbox-columns">
-            <label><input type="checkbox" name="drinks" value="Белое вино"> 🍾 Белое вино</label>
-            <label><input type="checkbox" name="drinks" value="Красное вино"> 🍷 Красное вино</label>
-            <label><input type="checkbox" name="drinks" value="Игристое вино"> 🥂 Игристое вино</label>
-            <label><input type="checkbox" name="drinks" value="Вермут"> 🍸 Вермут</label>
-            <label><input type="checkbox" name="drinks" value="Виски"> 🥃 Виски</label>
-            <label><input type="checkbox" name="drinks" value="Коньяк"> 🥃 Коньяк</label>
-            <label><input type="checkbox" name="drinks" value="Ром"> 🍹 Ром</label>
-            <label><input type="checkbox" name="drinks" value="Джин"> 🍸 Джин</label>
-            <label><input type="checkbox" name="drinks" value="Водка"> 🍶 Водка</label>
+            <label><input type="checkbox" name="drinks[]" value="Белое вино"> 🍾 Белое вино</label>
+            <label><input type="checkbox" name="drinks[]" value="Красное вино"> 🍷 Красное вино</label>
+            <label><input type="checkbox" name="drinks[]" value="Игристое вино"> 🥂 Игристое вино</label>
+            <label><input type="checkbox" name="drinks[]" value="Вермут"> 🍸 Вермут</label>
+            <label><input type="checkbox" name="drinks[]" value="Виски"> 🥃 Виски</label>
+            <label><input type="checkbox" name="drinks[]" value="Коньяк"> 🥃 Коньяк</label>
+            <label><input type="checkbox" name="drinks[]" value="Ром"> 🍹 Ром</label>
+            <label><input type="checkbox" name="drinks[]" value="Джин"> 🍸 Джин</label>
+            <label><input type="checkbox" name="drinks[]" value="Водка"> 🍶 Водка</label>
           </div>
         </div>
 
@@ -320,44 +320,25 @@
       <p>Делитесь фотографиями и видео с торжества</p>
     </div>
   </div>
+  <script>
 document.querySelector("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const form = e.target;
   const formData = new FormData(form);
 
-  const name = formData.get("name");
-  const dish = formData.get("dish");
-  const wishes = formData.get("wishes");
-
-  // исправлено: "drinks[]"
-  const drinks = [];
-  form.querySelectorAll('input[name="drinks[]"]:checked').forEach(cb => {
-    drinks.push(cb.value);
-  });
-
-  const data = {
-    name,
-    dish,
-    wishes,
-    drinks: drinks.join(", ")
-  };
-
-  fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_URL/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbw3r0F_FZXLg-O9nYR2UhNaBoA4YQbrxIHeujvq6zGlPJief8nOhchNmCcJuNixKKV5/exec", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
+    body: formData
   })
-  .then(res => res.text())
-  .then(text => {
+  .then(response => response.text())
+  .then(data => {
     alert("Спасибо! Форма успешно отправлена.");
-    form.reset();
+    form.reset(); // Очистить форму
   })
-  .catch(err => {
-    alert("Ошибка при отправке.");
-    console.error(err);
+  .catch(error => {
+    alert("Ошибка отправки формы. Попробуйте позже.");
+    console.error("Ошибка:", error);
   });
 });
 </script>
