@@ -320,25 +320,40 @@
       <p>Делитесь фотографиями и видео с торжества</p>
     </div>
   </div>
-  <script>
-document.querySelector("form").addEventListener("submit", function(e) {
+<script>
+
+ document.querySelector("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const form = e.target;
-  const formData = new FormData(form);
+  const name = form.querySelector('input[name="name"]').value;
+  const dish = form.querySelector('input[name="dish"]:checked')?.value || '';
+  const wishes = form.querySelector('textarea[name="wishes"]').value;
 
-  fetch("https://script.google.com/macros/s/AKfycbw3r0F_FZXLg-O9nYR2UhNaBoA4YQbrxIHeujvq6zGlPJief8nOhchNmCcJuNixKKV5/exec", {
+  const drinks = Array.from(form.querySelectorAll('input[name="drinks[]"]:checked')).map(cb => cb.value);
+
+  const data = {
+    name,
+    dish,
+    wishes,
+    drinks: drinks.join(', ')
+  };
+
+  fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_URL/exec", {
     method: "POST",
-    body: formData
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
   })
-  .then(response => response.text())
-  .then(data => {
+  .then(res => res.text())
+  .then(() => {
     alert("Спасибо! Форма успешно отправлена.");
-    form.reset(); // Очистить форму
+    form.reset();
   })
-  .catch(error => {
-    alert("Ошибка отправки формы. Попробуйте позже.");
-    console.error("Ошибка:", error);
+  .catch(err => {
+    alert("Ошибка при отправке.");
+    console.error(err);
   });
 });
 </script>
