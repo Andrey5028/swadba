@@ -330,8 +330,10 @@
   const dish = form.querySelector('input[name="dish"]:checked')?.value || '';
   const wishes = form.querySelector('textarea[name="wishes"]').value;
 
-  const drinks = Array.from(form.querySelectorAll('input[name="drinks[]"]:checked')).map(cb => cb.value);
-
+const drinks = [];
+form.querySelectorAll('input[name="drinks[]"]:checked').forEach(cb => {
+  drinks.push(cb.value);
+});
   const data = {
     name,
     dish,
