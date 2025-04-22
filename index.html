@@ -320,7 +320,6 @@
       <p>Делитесь фотографиями и видео с торжества</p>
     </div>
   </div>
- <script>
 document.querySelector("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -331,22 +330,20 @@ document.querySelector("form").addEventListener("submit", function(e) {
   const dish = formData.get("dish");
   const wishes = formData.get("wishes");
 
-  // Получаем ВСЕ выбранные напитки
+  // исправлено: "drinks[]"
   const drinks = [];
-  form.querySelectorAll('input[name="drinks"]:checked').forEach(cb => {
+  form.querySelectorAll('input[name="drinks[]"]:checked').forEach(cb => {
     drinks.push(cb.value);
   });
 
-  // Собираем данные
   const data = {
     name,
     dish,
     wishes,
-    drinks: drinks.join(", ")  // делаем строку для Google Sheet
+    drinks: drinks.join(", ")
   };
 
-  // Отправка
-  fetch("https://script.google.com/macros/s/AKfycbw3r0F_FZXLg-O9nYR2UhNaBoA4YQbrxIHeujvq6zGlPJief8nOhchNmCcJuNixKKV5/exec", {
+  fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_URL/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
