@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Приглашение на свадьбу</title>
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-     background-image: url('https://i.imgur.com/zTfvQ1Z.jpeg');
-  background-size: cover;         /* заполняет весь экран */
-  background-position: center;    /* центрирует изображение */
-  background-repeat: no-repeat;   /* не повторяет */
-  background-attachment: fixed;
-    }
+ body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
+.hero {
+  background-image: url('https://i.imgur.com/znLTaru.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* весь экран */
     header {
       text-align: center;
       padding: 40px 20px;
@@ -175,7 +179,9 @@
    header h1 {
         font-size: 2em;
       }
-
+.hero {
+    background-position: top center;
+  }
        .calendar-day.marked::after {
     font-size: 1.2em;
   }
